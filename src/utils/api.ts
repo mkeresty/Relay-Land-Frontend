@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from "next"
 import axios from 'axios';
 import { validateCookies } from "./helpers";
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'https://api-relay-mern.herokuapp.com/api';
 import { Guild } from './types'; 
 import { FaCommentsDollar } from "react-icons/fa";
 import { middleware } from "../pages/dashboard/[id]/_middleware";

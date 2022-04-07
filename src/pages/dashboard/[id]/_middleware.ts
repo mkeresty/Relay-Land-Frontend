@@ -23,5 +23,5 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
     const response = await fetchValidGuild(id, headers);
     return response.status === 200
       ? NextResponse.next()
-      : NextResponse.redirect('http://localhost:3000');
+      : NextResponse.redirect('/');
   }
