@@ -139,7 +139,7 @@ export const sendrole = async (context: GetServerSidePropsContext)=> {
 
 export const fetchMutualGuilds = async (context: GetServerSidePropsContext)=> {
     const headers = validateCookies(context);
-    //console.log(`HEADERS ARE ${headers}`)
+    console.log(`HEADERS ARE ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
         const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, { headers,
