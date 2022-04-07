@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(241, 242, 243); display: block; z-index: 1; position: relative; shape-rendering: auto;" width="1500" height="889" preserveAspectRatio="xMidYMid" viewBox="0 0 1500 889">
+<g transform="translate(750,444.5) scale(1,1) translate(-750,-444.5)"><linearGradient id="ldbk-1x721wyy2is" x1="-0.1" y1="0" x2="1.1" y2="1">
+  <animate attributeName="y2" repeatCount="indefinite" dur="4s" keyTimes="0;0.5;1" values="-0.5;0.5;-0.5" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" calcMode="spline"></animate>
+  <stop stop-color="#89207f" offset="0"></stop>
+  <stop stop-color="#276460" offset="1"></stop>
+</linearGradient>
+<rect x="0" y="0" width="1500" height="889" fill="url(#ldbk-1x721wyy2is)"></rect></g>
+</svg>

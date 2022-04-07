@@ -1,0 +1,51 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto';
+    height: 100%;
+    color: #fff;
+    //background-color: #1d1d1d;
+    background-image: '/relaygradient.svg';
+
+}
+
+#__next {
+  height: 100%
+}
+
+a {
+  color: "white";
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page {
+  height: 100%;
+  //background-color: #1d1d1d;
+  background-image: url('/relaygradient.svg');
+  padding: 50px;
+  width: 100vw;
+}
+
+
+@media only screen and (max-width: 550px) {
+  .page {
+    height: 100%;
+    //background-color: #1d1d1d;
+    background-image: url('/relaygradient.svg');
+    padding: 10px;
+    width: 100%;
+  }
+}
+
+
+.aligned-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}

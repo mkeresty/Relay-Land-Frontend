@@ -1,0 +1,149 @@
+.layout {
+    height: calc(100% - 70px);
+
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0px;
+    background-color: #121212;
+    color: #fff;
+    height: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+    justify-content: space-between;
+    cursor: pointer;
+
+}
+
+
+
+.relay {
+    display: flex;
+    flex-direction: row;
+    size:200%;
+    height: 60px;
+    width: 150px;
+    align-items: left;   
+    margin-left: -120%;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.avatar {
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.appbar {
+    background-color: #121212;
+    color: #fff;
+    display: flex;
+    align-items: normal;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 70px;
+    padding: 0 40px;
+    p {
+        font-size: 20px;
+    }
+    border-bottom-color: #008080;
+    border-bottom-width: .75px;
+    
+}
+
+
+
+.menu {
+    display: flex;
+    color: #fff;
+    align-items: center;
+    :last-child {
+        margin-left: 24px;
+    }
+    
+}
+.eth {
+    align-items: center;
+    text-align: right;
+    right: 2px;
+    cursor: pointer;
+    margin-right: -40%;
+    width: 40px;
+    
+}
+
+
+@media only screen and (max-width: 550px) {
+    .icons {
+        display: flex;
+        color: #fff;
+        flex-direction: row;
+        align-items: center;    
+        & > * {
+            margin: 12px 2px;
+        }
+    }
+    
+    .relay {
+        display: flex;
+        flex-direction: row;
+        size:150%;
+        height: 60px;
+        width: 150px;
+        align-items: center;    
+        margin-left: 0%;
+        margin-top: 8px;
+        cursor: pointer;
+    }
+    
+    .avatar {
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    
+    .appbar {
+        background-color: #121212;
+        color: #fff;
+        display: flex;
+        align-items: normal;
+        flex-direction: row;
+        height: 70px;
+        padding: 0 10px;
+        p {
+            font-size: 20px;
+        }
+        border-bottom-color: #008080;
+        border-bottom-width: .75px;
+        :last-child {
+            margin-right: 1px;
+        }
+        
+    }
+    
+    
+    
+    .menu {
+        display: flex;
+        color: #fff;
+        align-items: center;
+        margin-left: 2px;
+        :last-child {
+            margin-left: 2px;
+        }
+        
+    }
+    .eth {
+        width: 20px;
+        align-items: center;
+        text-align: right;
+        right: 2px;
+        cursor: pointer;
+        
+    }
+  }
