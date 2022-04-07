@@ -14,6 +14,7 @@ const validateMiddlewareCookies = (req: NextRequest) => {
     : false;
 }
 export async function middleware(req: NextRequest, ev: NextFetchEvent) {
+    console.log('using middleware');
 
 
     const headers = validateMiddlewareCookies(req);
@@ -23,5 +24,5 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
     const response = await fetchValidGuild(id, headers);
     return response.status === 200
       ? NextResponse.next()
-      : NextResponse.redirect('/');
+      : NextResponse.redirect('https://joyful-pastelito-d4f9a3.netlify.app/');
   }
