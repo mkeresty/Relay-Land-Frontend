@@ -5,6 +5,7 @@ import {FaDiscord} from 'react-icons/fa';
 const Home: NextPage = () => {
   const handleLogin = ()=> {
     window.location.href = 'https://api-relay-mern.herokuapp.com/api/auth/discord';
+    //window.location.href = 'http://localhost:3001/api/auth/discord';
   }
   return(
     <div className=" page aligned-center">

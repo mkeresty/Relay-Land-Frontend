@@ -7,6 +7,8 @@ import { createStore } from 'state-pool';
 
 const validateMiddlewareCookies = (req: NextRequest) => {
     const sessionID = req.cookies['connect.sid'];
+    console.log(sessionID);
+    console.log(sessionID);
     return sessionID 
     ? {
         Cookie: `connect.sid=${sessionID}`
@@ -18,6 +20,9 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
 
 
     const headers = validateMiddlewareCookies(req);
+    console.log(req);
+    console.log('headers');
+    console.log(headers);
     if (!headers) return NextResponse.redirect('/');
     if (!req.page.params) return NextResponse.redirect('/menu');
     const { id } = req.page.params;
