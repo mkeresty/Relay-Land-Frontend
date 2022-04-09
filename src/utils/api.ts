@@ -9,7 +9,7 @@ import { NextFetchEvent, NextRequest } from "next/server";
 
 //const API_URL = 'http://localhost:3001/api';
 
-const API_URL = 'http://www.alphaland.space/api';
+const API_URL = 'https://sage-seahorse-ba4f36.netlify.app/api';
 //const API_URL = 'hhttps://api-relay-mern.herokuapp.com/api';
 
 export const postowner = async (id: string) => {

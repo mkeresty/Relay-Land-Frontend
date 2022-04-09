@@ -4,7 +4,7 @@ import {FaDiscord} from 'react-icons/fa';
 
 const Home: NextPage = () => {
   const handleLogin = ()=> {
-    window.location.href = 'http://www.alphaland.space/api/auth/discord'
+    window.location.href = 'https://sage-seahorse-ba4f36.netlify.app/api/auth/discord'
     //window.location.href = 'https://api-relay-mern.herokuapp.com/api/auth/discord';
     //window.location.href = 'http://localhost:3001/api/auth/discord';
   }
