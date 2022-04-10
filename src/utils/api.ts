@@ -9,8 +9,8 @@ import { NextFetchEvent, NextRequest } from "next/server";
 
 //const API_URL = 'http://localhost:3001/api';
 
-const API_URL = 'http://www.alphaland.space/api';
-//const API_URL = 'hhttps://api-relay-mern.herokuapp.com/api';
+//const API_URL = 'http://www.alphaland.space/api';
+const API_URL = 'https://api-relay-mern.herokuapp.com/api';
 
 export const postowner = async (id: string) => {
     //statuscurrent();
@@ -73,7 +73,7 @@ export const fetchtest = async (id: string) => {
     //const data = 'dog';
     console.log('fetching...');
     const params = id;
-    await axios.post(`${API_URL}/auth/tester`, { params,
+    await axios.post(`${API_URL}/auth/tester`, { params, withCredentials: true, credentials: 'include',
     })
     //const z = fetch(`${API_URL}/guilds/final`);
     //console.log(z);
@@ -93,7 +93,7 @@ export const fetchtest2 = async (id: string) => {
     //const data = 'dog';
     console.log('fetching...');
     const params = id;
-    await axios.post(`${API_URL}/auth/testercoin`, { params,
+    await axios.post(`${API_URL}/auth/testercoin`, { params, withCredentials: true, credentials: 'include',
     })
     //const z = fetch(`${API_URL}/guilds/final`);
     //console.log(z);
@@ -106,7 +106,7 @@ export const fetchfinal = async (context: GetServerSidePropsContext)=> {
     //console.log(`HEADERS ARE ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const userid = await axios.get(`${API_URL}/guilds/final`, { headers,
+        const userid = await axios.get(`${API_URL}/guilds/final`, { headers, withCredentials: true,
          });
         console.log('PLEASE');
         console.log(userid);
@@ -124,10 +124,10 @@ export const sendrole = async (context: GetServerSidePropsContext)=> {
     console.log(`HEADERS ARE `)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${context.query.id}`, { headers,
+        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${context.query.id}`, { headers, withCredentials: true,
         });
         const info = guild.duserid;
-        await axios.get(`${API_URL}/guilds/final`, { headers,
+        await axios.get(`${API_URL}/guilds/final`, { headers, withCredentials: true,
          });
         console.log('PLEASE');
         console.log(info);
@@ -146,7 +146,7 @@ export const fetchMutualGuilds = async (context: GetServerSidePropsContext)=> {
     console.log(`HEADERS ARE ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, { headers,
+        const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, { headers, withCredentials: true,
          });
         //  const {data: guilds} = await axios.get(`${API_URL}/guilds`, { headers,
         //  });
@@ -168,7 +168,7 @@ export const fetchPlease = async (ctx: GetServerSidePropsContext)=> {
     console.log(`headerssss pls ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers,
+        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, withCredentials: true,
         });
         //console.log(guild);
         return {props: { guild } };
@@ -188,7 +188,7 @@ export const fetchGuild = async (ctx: GetServerSidePropsContext)=> {
     console.log(`headerssss ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers,
+        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, withCredentials: true,
         });
         //console.log(guild);
         return {props: { guild } };
