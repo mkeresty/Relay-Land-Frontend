@@ -7,7 +7,7 @@ import { createStore } from 'state-pool';
 
 const validateMiddlewareCookies = (req: NextRequest) => {
     const sessionID = req.cookies['connect.sid'];
-    console.log(sessionID);
+    console.log('sessionID');
     console.log(sessionID);
     return sessionID 
     ? {
@@ -29,5 +29,5 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
     const response = await fetchValidGuild(id, headers);
     return response.status === 200
       ? NextResponse.next()
-      : NextResponse.redirect('http://www.alphaland.space');
+      : NextResponse.redirect('https://api-relay-mern.herokuapp.com/');
   }

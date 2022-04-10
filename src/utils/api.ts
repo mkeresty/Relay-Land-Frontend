@@ -7,6 +7,21 @@ import { FaCommentsDollar } from "react-icons/fa";
 import { middleware } from "../pages/dashboard/[id]/_middleware";
 import { NextFetchEvent, NextRequest } from "next/server";
 
+
+
+
+export const login = async (credentials: Credential) => {
+    const response = await axios.post(
+      `https://api-relay-mern.herokuapp.com/api/auth/discord`,
+      credentials,
+      {
+        withCredentials: true
+      }
+    );
+  
+    return response;
+  }
+
 //const API_URL = 'http://localhost:3001/api';
 
 //const API_URL = 'http://www.alphaland.space/api';
