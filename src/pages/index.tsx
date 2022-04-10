@@ -8,7 +8,7 @@ import axios from 'axios';
 const Home: NextPage = () => {
   const handleLogin = ()=> {
     //window.location.href = 'https://sage-seahorse-ba4f36.netlify.app/api/auth/discord';
-    window.location.href = 'https://api-relay-mern.herokuapp.com/api/auth/discord';
+    window.location.href = 'https://backend.relayalpha.com/api/auth/discord';
     //window.location.href = 'http://localhost:3001/api/auth/discord';
   }
 

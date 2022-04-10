@@ -12,7 +12,7 @@ import { NextFetchEvent, NextRequest } from "next/server";
 
 export const login = async (credentials: Credential) => {
     const response = await axios.post(
-      `https://api-relay-mern.herokuapp.com/api/auth/discord`,
+      `https://backend.relayalpha.com/api/auth/discord`,
       credentials,
       {
         withCredentials: true
@@ -25,7 +25,7 @@ export const login = async (credentials: Credential) => {
 //const API_URL = 'http://localhost:3001/api';
 
 //const API_URL = 'http://www.alphaland.space/api';
-const API_URL = 'https://api-relay-mern.herokuapp.com/api';
+const API_URL = 'https://backend.relayalpha.com/api';
 
 export const postowner = async (id: string) => {
     //statuscurrent();

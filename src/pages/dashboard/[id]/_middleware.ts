@@ -29,5 +29,5 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
     const response = await fetchValidGuild(id, headers);
     return response.status === 200
       ? NextResponse.next()
-      : NextResponse.redirect('https://api-relay-mern.herokuapp.com/');
+      : NextResponse.redirect('https://frontend.relayalpha.com/');
   }
