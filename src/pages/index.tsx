@@ -27,7 +27,7 @@ const Home: NextPage = () => {
   return(
     <div className=" page aligned-center">
       <div>
-        <button className={styles.button} onClick={login}>
+        <button className={styles.button} onClick={handleLogin}>
           <FaDiscord size={50} color="white"/>
           <span><div style={{ color:"white", border:"", cursor: "pointer"}} >Login with Discord</div></span>
         </button>
