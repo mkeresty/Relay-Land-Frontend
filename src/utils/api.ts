@@ -10,17 +10,6 @@ import { NextFetchEvent, NextRequest } from "next/server";
 
 
 
-export const login = async (credentials: Credential) => {
-    const response = await axios.post(
-      `https://backend.relayalpha.com/api/auth/discord`,
-      credentials,
-      {
-        withCredentials: true
-      }
-    );
-  
-    return response;
-  }
 
 //const API_URL = 'http://localhost:3001/api';
 
