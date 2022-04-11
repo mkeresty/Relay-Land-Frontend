@@ -111,7 +111,7 @@ export const fetchfinal = async (context: GetServerSidePropsContext)=> {
     //console.log(`HEADERS ARE ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const userid = await axios.get(`${API_URL}/guilds/final`, { headers, withCredentials: true,
+        const userid = await axios.get(`${API_URL}/guilds/final`, { headers, 
          });
         console.log('PLEASE');
         console.log(userid);
@@ -129,7 +129,7 @@ export const sendrole = async (context: GetServerSidePropsContext)=> {
     console.log(`HEADERS ARE `)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${context.query.id}`, { headers, withCredentials: true,
+        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${context.query.id}`, { headers, 
         });
         const info = guild.duserid;
         await axios.get(`${API_URL}/guilds/final`, { headers, withCredentials: true,
@@ -153,7 +153,7 @@ export const fetchMutualGuilds = async (context: GetServerSidePropsContext)=> {
     console.log(`HEADERS ARE ${headers}`);
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, { headers, withCredentials: true,
+        const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, { headers, 
          });
         //  const {data: guilds} = await axios.get(`${API_URL}/guilds`, { headers,
         //  });
@@ -175,7 +175,7 @@ export const fetchPlease = async (ctx: GetServerSidePropsContext)=> {
     console.log(`headerssss pls ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, withCredentials: true,
+        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, 
         });
         //console.log(guild);
         return {props: { guild } };
@@ -195,7 +195,7 @@ export const fetchGuild = async (ctx: GetServerSidePropsContext)=> {
     console.log(`headerssss ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, withCredentials: true,
+        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers,
         });
         //console.log(guild);
         return {props: { guild } };
@@ -212,7 +212,7 @@ export const fetchGuild = async (ctx: GetServerSidePropsContext)=> {
 
 export const fetchValidGuild = (id: string, headers: HeadersInit) => {
     return fetch(`${API_URL}/guilds/${id}/permissions`, {
-        headers, credentials: 'include',
+        headers, 
     });
 };
 
