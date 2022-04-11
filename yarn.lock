@@ -1988,10 +1988,22 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@iconify/icons-cryptocurrency@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify/icons-cryptocurrency/-/icons-cryptocurrency-1.2.2.tgz#44db11357ea02fd10d8c8a717ec3d4444d39a134"
+  integrity sha512-Xk4WwSYwdGZscUtvH26j9uI/+b+5A8nSld9MVM6m90Gs7dIz5rilqM2RvMX9tBJ6kX8WpexHOe2qVKwikD57Ug==
+  dependencies:
+    "@iconify/types" "^1.0.12"
+
 "@iconify/react@^3.2.1":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@iconify/react/-/react-3.2.1.tgz#d18da31cec58c1aa8fdf4def451cc7e3196d88de"
   integrity sha512-yKzixjC9ct9RC/aSGo1OGxkG2rpfhlr/urRz6k2YZlIBzn92PBTlqtSx8o8dFYEorr3eUFSCBZFzBy1yw5jsAA==
+
+"@iconify/types@^1.0.12":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@iconify/types/-/types-1.1.0.tgz#dc15fc988b1b3fd558dd140a24ede7e0aac11280"
+  integrity sha512-Jh0llaK2LRXQoYsorIH8maClebsnzTcve+7U3rQUSnC11X4jtPnFuyatqFLvMxZ8MLG8dB4zfHsbPfuvxluONw==
 
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.0.5"

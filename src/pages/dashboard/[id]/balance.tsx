@@ -9,6 +9,7 @@ import { IoMdWallet } from 'react-icons/io';
 import { FaCommentsDollar, FaEthereum } from "react-icons/fa";
 import { SiBinance } from 'react-icons/si';
 import { Icon } from '@iconify/react';
+import maticIcon from '@iconify/icons-cryptocurrency/matic';
 import { useWeb3 } from "@3rdweb/hooks";
 
 import { ThirdwebProvider, ConnectWallet } from '@3rdweb/react';
@@ -727,7 +728,7 @@ const BalancePage: NextPageWithLayout<Props> = ({ guild }) => {
             <SiBinance color="white" size={50} />
         </Button>
         <Button onClick={()=> getrelapolyBalance({ address }, idf)} colorScheme='teal' variant='outline' h={140} w={130}>
-            <Icon icon="cryptocurrency:matic" color="white" height="50px"/>
+            <Icon icon={maticIcon} color="white" height="50px"/>
         </Button>
         <Button onClick={(()=> getrelayavaxbalance({ address }, idf))} colorScheme='teal' variant='outline' h={140} w={130}>
             <img color="white" src="/avax.svg" width="60px"></img>
