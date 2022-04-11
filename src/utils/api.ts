@@ -151,7 +151,12 @@ export const fetchMutualGuilds = async (context: GetServerSidePropsContext)=> {
     console.log('fetchmutguildsflag');
     const headers = validateCookies(context);
     console.log(`HEADERS ARE `);
+
+    
     if (!headers) return { redirect: {destination: '/' } };
+    console.log("ugh func2");
+    const ugh2 = await axios.get(`${API_URL}/guilds`, {headers});
+    console.log(ugh2);
     try{
         const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, { headers,
          });
