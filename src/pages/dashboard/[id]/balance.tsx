@@ -728,7 +728,7 @@ const BalancePage: NextPageWithLayout<Props> = ({ guild }) => {
             <SiBinance color="white" size={50} />
         </Button>
         <Button onClick={()=> getrelapolyBalance({ address }, idf)} colorScheme='teal' variant='outline' h={140} w={130}>
-        <img color="white" src="/polygon-matic-logo.svg"></img>
+        <img className={styles.img} color="white" src="/polygon-matic-logo.svg"></img>
         </Button>
         <Button onClick={(()=> getrelayavaxbalance({ address }, idf))} colorScheme='teal' variant='outline' h={140} w={130}>
             <img color="white" src="/avax.svg" width="60px"></img>
