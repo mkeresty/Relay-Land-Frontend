@@ -7,6 +7,7 @@ import { FaCommentsDollar } from "react-icons/fa";
 import { middleware } from "../pages/dashboard/[id]/_middleware";
 import { NextFetchEvent, NextRequest } from "next/server";
 
+import https from 'https';
 
 
 
@@ -147,13 +148,16 @@ export const sendrole = async (context: GetServerSidePropsContext)=> {
 
 
 export const fetchMutualGuilds = async (context: GetServerSidePropsContext)=> {
+    const agent = new https.Agent({  
+        rejectUnauthorized: false
+      });
     console.log('context');
     console.log(context);
     const headers = validateCookies(context);
     console.log(`HEADERS ARE ${headers}`);
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, { headers, withCredentials: true,
+        const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, { headers, withCredentials: true, httpsAgent: agent
          });
         //  const {data: guilds} = await axios.get(`${API_URL}/guilds`, { headers,
         //  });
@@ -192,11 +196,14 @@ export const fetchPlease = async (ctx: GetServerSidePropsContext)=> {
 
 export const fetchGuild = async (ctx: GetServerSidePropsContext)=> {
     //console.log(ctx);
+    const agent = new https.Agent({  
+        rejectUnauthorized: false
+      });
     const headers = validateCookies(ctx);
     console.log(`headerssss ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, withCredentials: true,
+        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, withCredentials: true,  httpsAgent: agent
         });
         //console.log(guild);
         return {props: { guild } };
@@ -212,8 +219,9 @@ export const fetchGuild = async (ctx: GetServerSidePropsContext)=> {
 
 
 export const fetchValidGuild = (id: string, headers: HeadersInit) => {
+    console.log('last one');
     return fetch(`${API_URL}/guilds/${id}/permissions`, {
-        headers, credentials: 'include',
+        headers, credentials: 'include', 
     });
 };
 
