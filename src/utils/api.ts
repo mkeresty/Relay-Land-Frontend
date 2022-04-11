@@ -8,11 +8,6 @@ import { NextFetchEvent, NextRequest } from "next/server";
 import axios from 'axios';
 import https from 'https';
 
-axios.defaults.httpsAgent = new https.Agent({
-  rejectUnauthorized: false,
-});
-
-
 
 
 
