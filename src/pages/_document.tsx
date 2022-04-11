@@ -1,4 +1,10 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import axios from 'axios';
+import https from 'https';
+
+axios.defaults.httpsAgent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
 class MyDocument extends Document {
     render(){
