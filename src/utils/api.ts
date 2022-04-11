@@ -221,7 +221,7 @@ export const fetchGuild = async (ctx: GetServerSidePropsContext)=> {
 
 export const fetchValidGuild = (id: string, headers: HeadersInit) => {
     return fetch(`${API_URL}/guilds/${id}/permissions`, {
-        headers,
+        headers, credentials: 'include'
     });
 };
 
