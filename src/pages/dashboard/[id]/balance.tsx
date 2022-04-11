@@ -21,7 +21,13 @@ import { fetchbob, fetchGuild, fetchPlease, fetchtest, fetchtest2, postminnow, p
 import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
 
-import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
+import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react';
+import {
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
+  } from '@chakra-ui/react';
 
 
 type Props = {
@@ -47,6 +53,8 @@ let minABI = [
       "type":"function"
     }
   ];
+
+  
 
 
   
@@ -76,10 +84,10 @@ const getrelayethBalance = async (address: { address: string | undefined; }, idf
 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
-    await delay(300);
-
     
 
+    document.getElementById("status")!.innerHTML = " ";
+    await delay(300);
     const Web3 = require("web3")
 
     const web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/3bcaa0448d9349dc8e1dbef57e533189"))
@@ -92,23 +100,26 @@ const getrelayethBalance = async (address: { address: string | undefined; }, idf
     console.log(relayethbalance );
 
     //const relayethbalance = 1;
-
+    
 
     if(relayethbalance >= 0.001 && relayethbalance < 500){
-        console.log(idf);
-        console.log("truuuu");
+        //console.log(idf);
+        //console.log("truuuu");
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
         postowner(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
     };
     if(relayethbalance >= 500 && relayethbalance < 5000 ){
-        console.log('minnow');
+        //console.log('minnow');
         postminnow(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
     };
     if(relayethbalance >= 5000){
-        console.log('whale');
+        //console.log('whale');
         postwhale(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
 
@@ -153,6 +164,8 @@ const getrelapolyBalance = async (address: { address: string | undefined; }, idf
 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
+    
+    document.getElementById("status")!.innerHTML = " ";
     await delay(300);
 
     const Web3 = require("web3")
@@ -167,17 +180,23 @@ const getrelapolyBalance = async (address: { address: string | undefined; }, idf
 
 
     if(relaypolybalance >= 0.001 && relaypolybalance < 500){
-        console.log(idf);
-        console.log("truuuu");
+        //console.log(idf);
+        //console.log("truuuu");
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
+        postowner(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
     };
     if(relaypolybalance >= 500 && relaypolybalance < 5000 ){
-        console.log('minnow');
+        //console.log('minnow');
+        postminnow(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
     };
     if(relaypolybalance >= 5000){
-        console.log('whale');
+        //console.log('whale');
+        postwhale(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
     document.getElementById("balance")!.innerHTML = relaypolybalance ;
@@ -218,7 +237,9 @@ const getrelaybscBalance = async (address: { address: string | undefined; }, idf
 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
+    document.getElementById("status")!.innerHTML = " ";
     await delay(300);
+    
 
     const Web3 = require("web3")
 
@@ -232,17 +253,23 @@ const getrelaybscBalance = async (address: { address: string | undefined; }, idf
 
 
     if(relaybscbalance >= 0.001 && relaybscbalance < 500){
-        console.log(idf);
-        console.log("truuuu");
+        //console.log(idf);
+        //console.log("truuuu");
+        postowner(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
     };
     if(relaybscbalance >= 500 && relaybscbalance < 5000 ){
-        console.log('minnow');
+        //console.log('minnow');
+        postminnow(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
     }
     if(relaybscbalance >= 5000){
-        console.log('whale');
+        //console.log('whale');
+        postwhale(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
     document.getElementById("balance")!.innerHTML = relaybscbalance ;
@@ -286,7 +313,10 @@ const getrelayavaxbalance = async (address: { address: string | undefined; }, id
 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
+    document.getElementById("status")!.innerHTML = " ";
     await delay(300);
+
+    
 
     const Web3 = require("web3")
 
@@ -301,17 +331,23 @@ const getrelayavaxbalance = async (address: { address: string | undefined; }, id
     console.log(relayavaxbalance);
 
     if(relayavaxbalance >= 0.001 && relayavaxbalance < 500){
-        console.log(idf);
-        console.log("truuuu");
+        //console.log(idf);
+        //console.log("truuuu");
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
+        postowner(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
     };
     if(relayavaxbalance >= 500 && relayavaxbalance < 5000 ){
-        console.log('minnow');
+        //console.log('minnow');
+        postminnow(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
     };
     if(relayavaxbalance >= 5000){
-        console.log('whale');
+        //console.log('whale');
+        postwhale(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
 
@@ -359,7 +395,9 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
+    document.getElementById("status")!.innerHTML = " ";
     await delay(300);
+   
 
 
     const Web3 = require("web3")
@@ -374,17 +412,23 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
 
 
     if(relaycronosbalance >= 0.001 && relaycronosbalance < 500){
-        console.log(idf);
-        console.log("truuuu");
+        //console.log(idf);
+        //console.log("truuuu");
+        postowner(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
     };
     if(relaycronosbalance >= 500 && relaycronosbalance < 5000 ){
-        console.log('minnow');
+        //console.log('minnow');
+        postminnow(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
     };
     if(relaycronosbalance >= 5000){
-        console.log('whale');
+        //console.log('whale');
+        postwhale(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
 
@@ -399,10 +443,17 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
 
   //1088
   const getrelaymetisBalance = async (address: { address: string | undefined; }, idf: string) => {
+
+
+    if (typeof address.address == 'undefined'){
+        document.getElementById("balance")!.innerHTML = "Please connect wallet";
+    };
+
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
-    await delay(300);
 
+    document.getElementById("status")!.innerHTML = " ";
+    await delay(300);
     const Web3 = require("web3")
 
     const web3 = new Web3(new Web3.providers.HttpProvider("https://andromeda-explorer.metis.io/api"))
@@ -424,17 +475,23 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     console.log(relaymetisbalance);
 
     if(relaymetisbalance >= 0.001 && relaymetisbalance < 500){
-        console.log(idf);
-        console.log("truuuu");
+        //console.log(idf);
+        //console.log("truuuu");
+        postowner(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
     };
     if(relaymetisbalance >= 500 && relaymetisbalance < 5000 ){
-        console.log('minnow');
+        //console.log('minnow');
+        postminnow(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
     }
     if(relaymetisbalance >= 5000){
-        console.log('whale');
+        //console.log('whale');
+        postwhale(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     }
 
     document.getElementById("balance")!.innerHTML = relaymetisbalance;
@@ -454,7 +511,10 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
+
+    document.getElementById("status")!.innerHTML = " ";
     await delay(300);
+
 
     const Web3 = require("web3")
 
@@ -469,17 +529,23 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
 
 
     if(relaymovrbalance >= 0.001 && relaymovrbalance < 500){
-        console.log(idf);
-        console.log("truuuu");
+        //console.log(idf);
+        //console.log("truuuu");
+        postowner(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
     };
     if(relaymovrbalance >= 500 && relaymovrbalance < 5000 ){
-        console.log('minnow');
+        //console.log('minnow');
+        postminnow(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
     };
     if(relaymovrbalance >= 5000){
-        console.log('whale');
+        //console.log('whale');
+        postwhale(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
     document.getElementById("balance")!.innerHTML = relaymovrbalance;
@@ -500,6 +566,8 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
+
+    document.getElementById("status")!.innerHTML = " ";
     await delay(300);
 
     const Web3 = require("web3")
@@ -515,17 +583,20 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
 
 
     if(relayhecobalance >= 0.001 && relayhecobalance < 500){
-        console.log(idf);
-        console.log("truuuu");
+
+        postowner(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
     };
     if(relayhecobalance >= 500 && relayhecobalance < 5000 ){
-        console.log('minnow');
+        postminnow(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
     };
     if(relayhecobalance >= 5000){
-        console.log('whale');
+        postwhale(idf);
+        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
     document.getElementById("balance")!.innerHTML = relayhecobalance;
@@ -705,7 +776,7 @@ const BalancePage: NextPageWithLayout<Props> = ({ guild }) => {
       connectWallet,
       disconnectWallet,
       getNetworkMetadata,
-    } = web3
+    } = web3;
 
 
 
@@ -718,6 +789,9 @@ const BalancePage: NextPageWithLayout<Props> = ({ guild }) => {
         </Stack>
         <Stack align='center' height="100">
         <div className={styles.words2} id="balance"></div>
+        </Stack>
+        <Stack align='center' height="100">
+        <div className={styles.words2} id="status"></div>
         </Stack>
         <div className={styles.container}>
         <Stack h={200} direction='row' spacing={8} align='center' alignContent={'center'} >
