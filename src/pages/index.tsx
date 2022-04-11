@@ -3,18 +3,20 @@ import styles from '../utils/styles/home.module.scss';
 import {FaDiscord} from 'react-icons/fa';
 import axios from 'axios';
 
-
+const API_URL = 'https://backend.relayalpha.com/api';
+//const API_URL = 'http://localhost:3001/api';
 
 const Home: NextPage = () => {
   const handleLogin = ()=> {
     //window.location.href = 'https://sage-seahorse-ba4f36.netlify.app/api/auth/discord';
-    window.location.href = 'https://backend.relayalpha.com/api/auth/discord';
+    window.location.href = `${API_URL}/auth/discord`;
+
     //window.location.href = 'http://localhost:3001/api/auth/discord';
   }
 
   const login = async () => {
     const response = await axios.get(
-      `https://api-relay-mern.herokuapp.com/api/auth/discord`,
+      `${API_URL}/auth/discord`,
       {
         withCredentials: true
       }

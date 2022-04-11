@@ -12,9 +12,10 @@ import { NextFetchEvent, NextRequest } from "next/server";
 
 
 //const API_URL = 'http://localhost:3001/api';
+const API_URL= 'https://backend.relayalpha.com/api';
 
 //const API_URL = 'http://www.alphaland.space/api';
-const API_URL = 'https://backend.relayalpha.com/api';
+//const API_URL = process.env.API_URL;
 
 export const postowner = async (id: string) => {
     //statuscurrent();

@@ -3,6 +3,9 @@ import { fetchValidGuild } from "../../../utils/api";
 import React from 'react';
 import { createStore } from 'state-pool';
 
+const FRONTEND_URL= 'https://frontend.relayalpha.com';
+//const FRONTEND_URL='http://localhost:3000';
+
 
 
 const validateMiddlewareCookies = (req: NextRequest) => {
@@ -29,5 +32,5 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
     const response = await fetchValidGuild(id, headers);
     return response.status === 200
       ? NextResponse.next()
-      : NextResponse.redirect('https://frontend.relayalpha.com/');
+      : NextResponse.redirect(FRONTEND_URL);
   }
