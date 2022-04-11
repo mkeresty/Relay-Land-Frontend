@@ -9,6 +9,12 @@ import { AppPropsWithLayout, Guild, IdDec } from '../utils/types';
 import { MoralisProvider } from "react-moralis";
 import { fetchPlease } from '../utils/api';
 import { IdContext } from '../utils/contexts/UserContext';
+import axios from 'axios';
+import https from 'https';
+
+axios.defaults.httpsAgent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout<any>) {
