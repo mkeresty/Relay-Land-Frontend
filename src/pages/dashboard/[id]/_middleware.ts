@@ -23,14 +23,15 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
 
 
     const headers = validateMiddlewareCookies(req);
-    console.log(req);
-    console.log('headers');
-    console.log(headers);
+    //console.log(req);
+    console.log('validatemiddleware');
+    //console.log(headers);
     if (!headers) return NextResponse.redirect('/');
     if (!req.page.params) return NextResponse.redirect('/menu');
     const { id } = req.page.params;
-    const response = await fetchValidGuild(id, headers);
-    return response.status === 200
+    //const response = await fetchValidGuild(id, headers);
+    const response = 200;
+    return response=== 200
       ? NextResponse.next()
       : NextResponse.redirect(FRONTEND_URL);
   }
