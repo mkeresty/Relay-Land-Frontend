@@ -7,9 +7,9 @@ import { FaCommentsDollar } from "react-icons/fa";
 import { middleware } from "../pages/dashboard/[id]/_middleware";
 import { NextFetchEvent, NextRequest } from "next/server";
 
-import https from 'https';
 
-
+const https = require('https');
+const httpsAgent = new https.Agent({ rejectUnauthorized: false })
 
 
 //const API_URL = 'http://localhost:3001/api';
@@ -79,7 +79,7 @@ export const fetchtest = async (id: string) => {
     //const data = 'dog';
     console.log('fetching...');
     const params = id;
-    await axios.post(`${API_URL}/auth/tester`, { params, withCredentials: true, credentials: 'include',
+    await axios.post(`${API_URL}/auth/tester`, { params, withCredentials: true, credentials: 'include', httpAgent: httpsAgent
     })
     //const z = fetch(`${API_URL}/guilds/final`);
     //console.log(z);
@@ -99,7 +99,7 @@ export const fetchtest2 = async (id: string) => {
     //const data = 'dog';
     console.log('fetching...');
     const params = id;
-    await axios.post(`${API_URL}/auth/testercoin`, { params, withCredentials: true, credentials: 'include',
+    await axios.post(`${API_URL}/auth/testercoin`, { params, withCredentials: true, credentials: 'include', httpAgent: httpsAgent
     })
     //const z = fetch(`${API_URL}/guilds/final`);
     //console.log(z);
@@ -112,7 +112,7 @@ export const fetchfinal = async (context: GetServerSidePropsContext)=> {
     //console.log(`HEADERS ARE ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const userid = await axios.get(`${API_URL}/guilds/final`, { headers, withCredentials: true,
+        const userid = await axios.get(`${API_URL}/guilds/final`, { headers, withCredentials: true, httpAgent: httpsAgent
          });
         console.log('PLEASE');
         console.log(userid);
@@ -130,7 +130,7 @@ export const sendrole = async (context: GetServerSidePropsContext)=> {
     console.log(`HEADERS ARE `)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${context.query.id}`, { headers, withCredentials: true,
+        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${context.query.id}`, { headers, withCredentials: true, httpAgent: httpsAgent
         });
         const info = guild.duserid;
         await axios.get(`${API_URL}/guilds/final`, { headers, withCredentials: true,
@@ -148,16 +148,13 @@ export const sendrole = async (context: GetServerSidePropsContext)=> {
 
 
 export const fetchMutualGuilds = async (context: GetServerSidePropsContext)=> {
-    const agent = new https.Agent({  
-        rejectUnauthorized: false
-      });
     console.log('context');
     console.log(context);
     const headers = validateCookies(context);
     console.log(`HEADERS ARE ${headers}`);
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, { headers, withCredentials: true, httpsAgent: agent
+        const { data: guilds } = await axios.get<Guild[]>(`${API_URL}/guilds`, { headers, withCredentials: true, httpAgent: httpsAgent
          });
         //  const {data: guilds} = await axios.get(`${API_URL}/guilds`, { headers,
         //  });
@@ -180,7 +177,7 @@ export const fetchPlease = async (ctx: GetServerSidePropsContext)=> {
     console.log(`headerssss pls ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, withCredentials: true,
+        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, withCredentials: true, httpAgent: httpsAgent
         });
         //console.log(guild);
         return {props: { guild } };
@@ -196,14 +193,11 @@ export const fetchPlease = async (ctx: GetServerSidePropsContext)=> {
 
 export const fetchGuild = async (ctx: GetServerSidePropsContext)=> {
     //console.log(ctx);
-    const agent = new https.Agent({  
-        rejectUnauthorized: false
-      });
     const headers = validateCookies(ctx);
     console.log(`headerssss ${headers}`)
     if (!headers) return { redirect: {destination: '/' } };
     try{
-        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, withCredentials: true,  httpsAgent: agent
+        const { data: guild } = await axios.get<Guild>(`${API_URL}/guilds/${ctx.query.id}`, { headers, withCredentials: true, httpAgent: httpsAgent
         });
         //console.log(guild);
         return {props: { guild } };
@@ -219,7 +213,6 @@ export const fetchGuild = async (ctx: GetServerSidePropsContext)=> {
 
 
 export const fetchValidGuild = (id: string, headers: HeadersInit) => {
-    console.log('last one');
     return fetch(`${API_URL}/guilds/${id}/permissions`, {
         headers, credentials: 'include', 
     });
