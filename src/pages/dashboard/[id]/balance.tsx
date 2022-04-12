@@ -1410,31 +1410,13 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
       getNetworkMetadata,
     } = web3;
 
-    const theme = extendTheme({
-        styles: {
-          global: {
-            // styles for the `body`
-            body: {
-              bg: 'black',
-              color: 'white',
-            },
-            // styles for the `a`
-            a: {
-              color: 'teal.500',
-              _hover: {
-                textDecoration: 'underline',
-              },
-            },
-          },
-        },
-      })
 
     return( 
     
     
     <div color="white" className="page" align-items='center' >
     <>
-    <ChakraProvider theme={theme} >
+    <ChakraProvider>
       <Modal isCentered isOpen={isOwner} onClose={closerOwner}>
         {overlay}
         <ModalContent>
@@ -1451,7 +1433,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
       </ChakraProvider>
     </>
     <>
-    <ChakraProvider theme={theme} >
+    <ChakraProvider>
       <Modal isCentered isOpen={isMinnow} onClose={closerMinnow}>
         {overlay}
         <ModalContent>
@@ -1468,7 +1450,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
       </ChakraProvider>
     </>
     <>
-    <ChakraProvider theme={theme} >
+    <ChakraProvider>
       <Modal isCentered isOpen={isWhale} onClose={closerWhale}>
         {overlay}
         <ModalContent>
