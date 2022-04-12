@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import { DashboardLayout } from "../../../components/layouts/dashboard";
 import { Guild, NextPageWithLayout } from "../../../utils/types";
 import styles from './index.module.scss';
-import { Button, Grid, GridItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spinner, Stack, useDisclosure } from '@chakra-ui/react'
+import { Button, ChakraProvider, Grid, GridItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spinner, Stack, useDisclosure } from '@chakra-ui/react'
 
 import { IoMdWallet } from 'react-icons/io';
 import { FaCommentsDollar, FaEthereum } from "react-icons/fa";
@@ -30,9 +30,18 @@ import {
   } from '@chakra-ui/react';
 
 
+import { extendTheme } from '@chakra-ui/react';
+import { mode } from '@chakra-ui/theme-tools';
+
+
 type Props = {
     guild: Guild;
   };
+
+  
+  // Version 1: Using objects
+
+  
 
 
 // let minABI = [
@@ -774,14 +783,17 @@ const BalancePage: NextPageWithLayout<Props> = ({ guild }) => {
         />
       );
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen: isOwner, onOpen: onOwner, onClose: closerOwner } = useDisclosure();
+    const { isOpen: isMinnow, onOpen: onMinnow, onClose: closerMinnow } = useDisclosure();
+    const { isOpen: isWhale, onOpen: onWhale, onClose: closerWhale} = useDisclosure();
+
     const [overlay, setOverlay] = React.useState(<OverlayOne />)
       
     const letssee= () => {
         if(5>1){
             console.log('tru')
             setOverlay(<OverlayOne />)
-            onOpen()
+            //onOpen()
 
         }
     };
@@ -840,7 +852,7 @@ const getrelayethBalance = async (address: { address: string | undefined; }, idf
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
     
 
-    document.getElementById("status")!.innerHTML = " ";
+    //document.getElementById("status")!.innerHTML = " ";
     await delay(300);
     const Web3 = require("web3")
 
@@ -865,17 +877,21 @@ const getrelayethBalance = async (address: { address: string | undefined; }, idf
         postowner(idf);
         //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         setOverlay(<OverlayOne />)
-        onOpen()
+        onOwner()
     };
     if(relayethbalance >= 500 && relayethbalance < 5000 ){
         //console.log('minnow');
         postminnow(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        setOverlay(<OverlayOne />);
+        onMinnow();
     };
     if(relayethbalance >= 5000){
         //console.log('whale');
         postwhale(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        setOverlay(<OverlayOne />);
+        onWhale();
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
 
@@ -887,32 +903,7 @@ const getrelayethBalance = async (address: { address: string | undefined; }, idf
     };
   };
 
-// const ethbalance = async (address: { address: string | undefined; }, idf: string) => {
-//     const Web3 = require("web3")
 
-//     const web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/3bcaa0448d9349dc8e1dbef57e533189"))
-
-//     const bal = await web3.eth.getBalance(address.address);
-//     const etherValue = Web3.utils.fromWei(bal, 'ether');
-
-//     console.log(etherValue);
-//     if(etherValue>0){
-//         console.log(idf);
-//         console.log("truuuu");
-//         fetchtest2(idf);
-//         //console.log(GetServerSidePropsContext)
-//         //ethrole(GetServerSidePropsContext);
-//     };
-
-//     document.getElementById("balance").innerHTML = etherValue;
-//     //console.log(bal)
-//     return(
-//         etherValue
-//     )
-// };
-
-
-//137
 const getrelapolyBalance = async (address: { address: string | undefined; }, idf: string) => {
     if (typeof address.address == 'undefined'){
         document.getElementById("balance")!.innerHTML = "Please connect wallet";
@@ -921,7 +912,7 @@ const getrelapolyBalance = async (address: { address: string | undefined; }, idf
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
     
-    document.getElementById("status")!.innerHTML = " ";
+    //document.getElementById("status")!.innerHTML = " ";
     await delay(300);
 
     const Web3 = require("web3")
@@ -943,18 +934,22 @@ const getrelapolyBalance = async (address: { address: string | undefined; }, idf
         //ethrole(GetServerSidePropsContext);
         postowner(idf);
         //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
-        setOverlay(<OverlayOne />)
-        onOpen()
+        setOverlay(<OverlayOne />);
+        onOwner();
     };
     if(relaypolybalance >= 500 && relaypolybalance < 5000 ){
         //console.log('minnow');
         postminnow(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        setOverlay(<OverlayOne />);
+        onMinnow();
     };
     if(relaypolybalance >= 5000){
         //console.log('whale');
         postwhale(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        setOverlay(<OverlayOne />);
+        onWhale();
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
     document.getElementById("balance")!.innerHTML = relaypolybalance.toString() ;
@@ -995,7 +990,7 @@ const getrelaybscBalance = async (address: { address: string | undefined; }, idf
 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
-    document.getElementById("status")!.innerHTML = " ";
+    //document.getElementById("status")!.innerHTML = " ";
     await delay(300);
     
 
@@ -1017,7 +1012,7 @@ const getrelaybscBalance = async (address: { address: string | undefined; }, idf
         postowner(idf);
         //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         setOverlay(<OverlayOne />)
-        onOpen()
+        onOwner()
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
@@ -1025,12 +1020,16 @@ const getrelaybscBalance = async (address: { address: string | undefined; }, idf
     if(relaybscbalance >= 500 && relaybscbalance < 5000 ){
         //console.log('minnow');
         postminnow(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        setOverlay(<OverlayOne />);
+        onMinnow();
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
     }
     if(relaybscbalance >= 5000){
         //console.log('whale');
         postwhale(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        setOverlay(<OverlayOne />);
+        onWhale();
     };
 
     document.getElementById("balance")!.innerHTML = relaybscbalance.toString() ;
@@ -1074,7 +1073,7 @@ const getrelayavaxbalance = async (address: { address: string | undefined; }, id
 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
-    document.getElementById("status")!.innerHTML = " ";
+    //document.getElementById("status")!.innerHTML = " ";
     await delay(300);
 
     
@@ -1100,17 +1099,21 @@ const getrelayavaxbalance = async (address: { address: string | undefined; }, id
         postowner(idf);
         //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         setOverlay(<OverlayOne />)
-        onOpen()
+        onOwner()
     };
     if(relayavaxbalance >= 500 && relayavaxbalance < 5000 ){
         //console.log('minnow');
         postminnow(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        setOverlay(<OverlayOne />);
+        onMinnow();
     };
     if(relayavaxbalance >= 5000){
         //console.log('whale');
         postwhale(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        setOverlay(<OverlayOne />);
+        onWhale();
     };
 
 
@@ -1158,7 +1161,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
-    document.getElementById("status")!.innerHTML = " ";
+    //document.getElementById("status")!.innerHTML = " ";
     await delay(300);
    
 
@@ -1180,7 +1183,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         postowner(idf);
         //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         setOverlay(<OverlayOne />)
-        onOpen()
+        onOwner()
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
@@ -1188,12 +1191,16 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     if(relaycronosbalance >= 500 && relaycronosbalance < 5000 ){
         //console.log('minnow');
         postminnow(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        setOverlay(<OverlayOne />);
+        onMinnow();
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
     };
     if(relaycronosbalance >= 5000){
         //console.log('whale');
         postwhale(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        setOverlay(<OverlayOne />);
+        onWhale();
     };
 
 
@@ -1217,7 +1224,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
 
-    document.getElementById("status")!.innerHTML = " ";
+    //document.getElementById("status")!.innerHTML = " ";
     await delay(300);
     const Web3 = require("web3")
 
@@ -1245,7 +1252,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         postowner(idf);
         //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         setOverlay(<OverlayOne />)
-        onOpen()
+        onOwner()
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
@@ -1253,12 +1260,16 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     if(relaymetisbalance >= 500 && relaymetisbalance < 5000 ){
         //console.log('minnow');
         postminnow(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        setOverlay(<OverlayOne />);
+        onMinnow();
     }
     if(relaymetisbalance >= 5000){
         //console.log('whale');
         postwhale(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        setOverlay(<OverlayOne />);
+        onWhale();
     }
 
     document.getElementById("balance")!.innerHTML = relaymetisbalance;
@@ -1279,7 +1290,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
 
-    document.getElementById("status")!.innerHTML = " ";
+    //document.getElementById("status")!.innerHTML = " ";
     await delay(300);
 
 
@@ -1301,7 +1312,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         postowner(idf);
         //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         setOverlay(<OverlayOne />)
-        onOpen()
+        onOwner()
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
@@ -1309,12 +1320,16 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     if(relaymovrbalance >= 500 && relaymovrbalance < 5000 ){
         //console.log('minnow');
         postminnow(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        setOverlay(<OverlayOne />);
+        onMinnow();
     };
     if(relaymovrbalance >= 5000){
         //console.log('whale');
         postwhale(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        setOverlay(<OverlayOne />);
+        onWhale();
     };
 
     document.getElementById("balance")!.innerHTML = relaymovrbalance;
@@ -1336,7 +1351,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     if (typeof address.address !== 'undefined'){
     document.getElementById("balance")!.innerHTML ="<img src=\"/loading (1).svg\" width=\"50px\" height=\"50px\">";
 
-    document.getElementById("status")!.innerHTML = " ";
+    //document.getElementById("status")!.innerHTML = " ";
     await delay(300);
 
     const Web3 = require("web3")
@@ -1356,18 +1371,22 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         postowner(idf);
         //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
         setOverlay(<OverlayOne />)
-        onOpen()
+        onOwner()
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
     };
     if(relayhecobalance >= 500 && relayhecobalance < 5000 ){
         postminnow(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Minnow";
+        setOverlay(<OverlayOne />);
+        onMinnow();
     };
     if(relayhecobalance >= 5000){
         postwhale(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
+        setOverlay(<OverlayOne />);
+        onWhale();
     };
 
     document.getElementById("balance")!.innerHTML = relayhecobalance;
@@ -1377,170 +1396,6 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     )
     };
   };
-
-
-//   const getrelayharmBalance = async (address: { address: string | undefined; }, idf: string) => {
-
-//     const Web3 = require("web3")
-
-//     const web3 = new Web3(new Web3.providers.HttpProvider("https://api.s0.t.hmny.io"));
-//     const hecotokenAddress = "0xf1361d97a1b134ebf96a9aa482bc005d4f41177e";
-
-//     let contract = new web3.eth.Contract(minABI,hecotokenAddress);
-//     const balance = await contract.methods.balanceOf(address.address).call();
-//     const relayhecobalance = web3.utils.fromWei(balance);
-//     console.log(relayhecobalance);
-
-
-
-//     if(relayhecobalance >0){
-//         console.log(idf);
-//         console.log("truuuu");
-//         //fetchtest2(idf);
-//         //console.log(GetServerSidePropsContext)
-//         //ethrole(GetServerSidePropsContext);
-//     };
-
-//     document.getElementById("balance").innerHTML = relayhecobalance;
-//     //console.log(bal)
-//     return(
-//         relayhecobalance
-//     )
-//   };
-
-//   const getrelayiotBalance = async (address: { address: string | undefined; }, idf: string) => {
-
-//     const Web3 = require("web3")
-
-//     const web3 = new Web3(new Web3.providers.HttpProvider("https://rpc.ankr.com/iotex"));
-//     const hecotokenAddress = "0xf1361d97a1b134ebf96a9aa482bc005d4f41177e";
-
-//     let contract = new web3.eth.Contract(minABI,hecotokenAddress);
-//     const balance = await contract.methods.balanceOf(address.address).call();
-//     const relayhecobalance = web3.utils.fromWei(balance);
-//     console.log(relayhecobalance);
-
-
-
-//     if(relayhecobalance >0){
-//         console.log(idf);
-//         console.log("truuuu");
-//         //fetchtest2(idf);
-//         //console.log(GetServerSidePropsContext)
-//         //ethrole(GetServerSidePropsContext);
-//     };
-
-//     document.getElementById("balance").innerHTML = relayhecobalance;
-//     //console.log(bal)
-//     return(
-//         relayhecobalance
-//     )
-//   };
-
-
-// const cronosbalance = async (address: { address: string | undefined; }) => {
-//     const Web3 = require("web3")
-
-//     const web3 = new Web3(new Web3.providers.HttpProvider("https://evm.cronos.org/"))
-
-//     const bal = await web3.eth.getBalance(address.address);
-//     const cronosValue = Web3.utils.fromWei(bal, 'ether');
-
-//     console.log(cronosValue);
-
-//     //var balance = Number(web3.fromWei(bal, "ether"));
-//     //console.debug("Balance for address["+address+"]="+balance);
-
-//     //var balance_element = document.getElementById("balance");
-//     //balance_element.innerHTML = balance.valueOf();
-//     document.getElementById("balance").innerHTML = cronosValue;
-//     //console.log(bal)
-//     return(
-//         cronosValue
-//     )
-// };
-   
-
-// const harmbalance = async (address: { address: string | undefined; }) => {
-//     const Web3 = require("web3")
-
-//     const web3 = new Web3(new Web3.providers.HttpProvider("https://api.s0.t.hmny.io"))
-
-//     const bal = await web3.eth.getBalance(address.address);
-//     const harmValue = Web3.utils.fromWei(bal, 'ether');
-
-//     console.log(harmValue);
-
-//     //var balance = Number(web3.fromWei(bal, "ether"));
-//     //console.debug("Balance for address["+address+"]="+balance);
-
-//     //var balance_element = document.getElementById("balance");
-//     //balance_element.innerHTML = balance.valueOf();
-//     document.getElementById("balance").innerHTML = harmValue;
-//     //console.log(bal)
-//     return(
-//         harmValue
-//     )
-// };
-
-
-// const fantbalance = async (address: { address: string | undefined; }) => {
-//     const Web3 = require("web3")
-
-//     const web3 = new Web3(new Web3.providers.HttpProvider("https://rpcapi.fantom.network"))
-
-//     const bal = await web3.eth.getBalance(address.address);
-//     const fantValue = Web3.utils.fromWei(bal, 'ether');
-
-//     console.log(fantValue);
-
-//     //var balance = Number(web3.fromWei(bal, "ether"));
-//     //console.debug("Balance for address["+address+"]="+balance);
-
-//     //var balance_element = document.getElementById("balance");
-//     //balance_element.innerHTML = balance.valueOf();
-//     document.getElementById("balance").innerHTML = fantValue;
-//     //console.log(bal)
-//     return(
-//         fantValue
-//     )
-// };
-
-
-// const solbalance = async ({ publicKey }) => {
-
-//     //const web3s = useWallet();
-//     //const { publicKey } = web3s;
-//     console.log({ publicKey });
-
-//     const web3 = require("@solana/web3.js");
-
-//     const solana = new web3.Connection("https://api.mainnet-beta.solana.com");
-
-//     const bal = await solana.getBalance(publicKey);
-
-//     console.log(bal);
-//     const bal2 = bal / 1000000000;
-
-//     //var balance = Number(web3.fromWei(bal, "ether"));
-//     //console.debug("Balance for address["+address+"]="+balance);
-
-//     //var balance_element = document.getElementById("balance");
-//     //balance_element.innerHTML = balance.valueOf();
-//     document.getElementById("balance2").innerHTML = bal2;
-//     //console.log(bal)
-//     return(
-//         bal2
-//     )
-// };
-
-
-
-
-
-
-    //////////////////////////////////////
-    ///////////////////////////////////////
 
     const idf = guild.duserid;
 
@@ -1555,15 +1410,32 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
       getNetworkMetadata,
     } = web3;
 
-
+    const theme = extendTheme({
+        styles: {
+          global: {
+            // styles for the `body`
+            body: {
+              bg: 'gray.400',
+              color: 'white',
+            },
+            // styles for the `a`
+            a: {
+              color: 'teal.500',
+              _hover: {
+                textDecoration: 'underline',
+              },
+            },
+          },
+        },
+      })
 
     return( 
     
     
     <div color="white" className="page" align-items='center' >
     <>
-
-      <Modal isCentered isOpen={isOpen} onClose={onClose}>
+    <ChakraProvider theme={theme} >
+      <Modal isCentered isOpen={isOwner} onClose={closerOwner}>
         {overlay}
         <ModalContent>
           <ModalHeader>Congratulations!</ModalHeader>
@@ -1572,10 +1444,45 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
             <div>RELAY Owner!</div>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
+            <Button onClick={closerOwner}>Close</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
+      </ChakraProvider>
+    </>
+    <>
+    <ChakraProvider theme={theme} >
+      <Modal isCentered isOpen={isMinnow} onClose={closerMinnow}>
+        {overlay}
+        <ModalContent>
+          <ModalHeader>Congratulations!</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <div>RELAY Minnow!</div>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={closerMinnow}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      </ChakraProvider>
+    </>
+    <>
+    <ChakraProvider theme={theme} >
+      <Modal isCentered isOpen={isWhale} onClose={closerWhale}>
+        {overlay}
+        <ModalContent>
+          <ModalHeader>Congratulations!</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <div>RELAY Whale!</div>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={closerWhale}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      </ChakraProvider>
     </>
 
         <Stack align='center' height="100">
@@ -1583,9 +1490,6 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         </Stack>
         <Stack align='center' height="100">
         <div className={styles.words2} id="balance"></div>
-        </Stack>
-        <Stack align='center' height="100">
-        <div className={styles.words2} id="status"></div>
         </Stack>
         <div className={styles.container}>
         <Stack h={200} direction='row' spacing={8} align='center' alignContent={'center'} >
