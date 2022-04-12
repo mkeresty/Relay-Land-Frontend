@@ -879,7 +879,7 @@ const getrelayethBalance = async (address: { address: string | undefined; }, idf
     };
 
 
-    document.getElementById("balance")!.innerHTML = relayethbalance ;
+    document.getElementById("balance")!.innerHTML = relayethbalance.toString() ;
     //console.log(bal)
     return(
         relayethbalance 
@@ -957,7 +957,7 @@ const getrelapolyBalance = async (address: { address: string | undefined; }, idf
         document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
-    document.getElementById("balance")!.innerHTML = relaypolybalance ;
+    document.getElementById("balance")!.innerHTML = relaypolybalance.toString() ;
     //console.log(bal)
     return(
         relaypolybalance 
@@ -1033,7 +1033,7 @@ const getrelaybscBalance = async (address: { address: string | undefined; }, idf
         document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Whale";
     };
 
-    document.getElementById("balance")!.innerHTML = relaybscbalance ;
+    document.getElementById("balance")!.innerHTML = relaybscbalance.toString() ;
     //console.log(bal)
     return(
         relaybscbalance 
