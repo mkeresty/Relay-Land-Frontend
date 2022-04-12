@@ -1435,7 +1435,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     <div color="white" className="page" align-items='center' >
     <>
     <ChakraProvider theme={theme} >
-      <Modal colorScheme={} isCentered isOpen={isOwner} onClose={closerOwner}>
+      <Modal isCentered isOpen={isOwner} onClose={closerOwner}>
         {overlay}
         <ModalContent>
           <ModalHeader>Congratulations!</ModalHeader>
