@@ -27,52 +27,11 @@ type Props = {
 const MenuPage: NextPage<Props> = ({ guilds })=> {
     const router = useRouter();
 
-    const OverlayOne = () => (
-        <ModalOverlay
-          bg='blackAlpha.300'
-          backdropFilter='blur(10px) hue-rotate(90deg)'
-        />
-      );
-
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const [overlay, setOverlay] = React.useState(<OverlayOne />)
-      
-    const letssee= () => {
-        if(5>1){
-            console.log('tru')
-            setOverlay(<OverlayOne />)
-            onOpen()
-
-        }
-    };
 
     return (
         
         <div className="page">
-                <>
-      <Button
-        onClick={() => {
-            letssee()
-        }}
-      >
-        Use Overlay one
-      </Button>
-
-      <Modal isCentered isOpen={isOpen} onClose={onClose}>
-        {overlay}
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <div>Custom backdrop filters!</div>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-
+ 
 
 
 

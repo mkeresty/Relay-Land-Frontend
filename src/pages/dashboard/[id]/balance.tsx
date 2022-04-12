@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import { DashboardLayout } from "../../../components/layouts/dashboard";
 import { Guild, NextPageWithLayout } from "../../../utils/types";
 import styles from './index.module.scss';
-import { Button, Grid, GridItem, Spinner, Stack } from '@chakra-ui/react'
+import { Button, Grid, GridItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spinner, Stack, useDisclosure } from '@chakra-ui/react'
 
 import { IoMdWallet } from 'react-icons/io';
 import { FaCommentsDollar, FaEthereum } from "react-icons/fa";
@@ -765,6 +765,27 @@ type Props = {
 
 const BalancePage: NextPageWithLayout<Props> = ({ guild }) => {
 
+
+    
+    const OverlayOne = () => (
+        <ModalOverlay
+          bg='blackAlpha.300'
+          backdropFilter='blur(10px) hue-rotate(90deg)'
+        />
+      );
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [overlay, setOverlay] = React.useState(<OverlayOne />)
+      
+    const letssee= () => {
+        if(5>1){
+            console.log('tru')
+            setOverlay(<OverlayOne />)
+            onOpen()
+
+        }
+    };
+
     //////////////////////////////////////////
     ///////////////////////////////////////
     
@@ -829,10 +850,10 @@ const getrelayethBalance = async (address: { address: string | undefined; }, idf
 
     let contract = new web3.eth.Contract(minABI,ethtokenAddress);
     const balance = await contract.methods.balanceOf(address.address).call();
-    const relayethbalance = web3.utils.fromWei(balance);
-    console.log(relayethbalance );
+    //const relayethbalance = web3.utils.fromWei(balance);
+    //console.log(relayethbalance );
 
-    //const relayethbalance = 1;
+    const relayethbalance = 1;
     
 
     if(relayethbalance >= 0.001 && relayethbalance < 500){
@@ -842,7 +863,9 @@ const getrelayethBalance = async (address: { address: string | undefined; }, idf
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
         postowner(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        setOverlay(<OverlayOne />)
+        onOpen()
     };
     if(relayethbalance >= 500 && relayethbalance < 5000 ){
         //console.log('minnow');
@@ -908,9 +931,9 @@ const getrelapolyBalance = async (address: { address: string | undefined; }, idf
 
     let contract = new web3.eth.Contract(minABI,polytokenAddress);
     const balance = await contract.methods.balanceOf(address.address).call();
-    const relaypolybalance = web3.utils.fromWei(balance);
-    console.log(relaypolybalance );
-
+    //const relaypolybalance = web3.utils.fromWei(balance);
+    //console.log(relaypolybalance );
+    const relaypolybalance = 501;
 
     if(relaypolybalance >= 0.001 && relaypolybalance < 500){
         //console.log(idf);
@@ -919,7 +942,9 @@ const getrelapolyBalance = async (address: { address: string | undefined; }, idf
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
         postowner(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        setOverlay(<OverlayOne />)
+        onOpen()
     };
     if(relaypolybalance >= 500 && relaypolybalance < 5000 ){
         //console.log('minnow');
@@ -981,15 +1006,18 @@ const getrelaybscBalance = async (address: { address: string | undefined; }, idf
 
     let contract = new web3.eth.Contract(minABI,bsctokenAddress);
     const balance = await contract.methods.balanceOf(address.address).call();
-    const relaybscbalance = web3.utils.fromWei(balance);
-    console.log(relaybscbalance );
+    //const relaybscbalance = web3.utils.fromWei(balance);
+    //console.log(relaybscbalance );
+    const relaybscbalance = 1000000;
 
 
     if(relaybscbalance >= 0.001 && relaybscbalance < 500){
         //console.log(idf);
         //console.log("truuuu");
         postowner(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        setOverlay(<OverlayOne />)
+        onOpen()
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
@@ -1070,7 +1098,9 @@ const getrelayavaxbalance = async (address: { address: string | undefined; }, id
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
         postowner(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        setOverlay(<OverlayOne />)
+        onOpen()
     };
     if(relayavaxbalance >= 500 && relayavaxbalance < 5000 ){
         //console.log('minnow');
@@ -1148,7 +1178,9 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         //console.log(idf);
         //console.log("truuuu");
         postowner(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        setOverlay(<OverlayOne />)
+        onOpen()
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
@@ -1211,7 +1243,9 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         //console.log(idf);
         //console.log("truuuu");
         postowner(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        setOverlay(<OverlayOne />)
+        onOpen()
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
@@ -1265,7 +1299,9 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         //console.log(idf);
         //console.log("truuuu");
         postowner(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        setOverlay(<OverlayOne />)
+        onOpen()
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
@@ -1318,7 +1354,9 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     if(relayhecobalance >= 0.001 && relayhecobalance < 500){
 
         postowner(idf);
-        document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        //document.getElementById("status")!.innerHTML = "Congrats! You are now a RELAY Owner";
+        setOverlay(<OverlayOne />)
+        onOpen()
         //fetchtest2(idf);
         //console.log(GetServerSidePropsContext)
         //ethrole(GetServerSidePropsContext);
@@ -1523,6 +1561,23 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     
     
     <div color="white" className="page" align-items='center' >
+    <>
+
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
+        {overlay}
+        <ModalContent>
+          <ModalHeader>Congratulations!</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <div>RELAY Owner!</div>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+
         <Stack align='center' height="100">
             <div className={styles.words}>Balance</div>
         </Stack>
