@@ -862,10 +862,10 @@ const getrelayethBalance = async (address: { address: string | undefined; }, idf
 
     let contract = new web3.eth.Contract(minABI,ethtokenAddress);
     const balance = await contract.methods.balanceOf(address.address).call();
-    //const relayethbalance = web3.utils.fromWei(balance);
+    const relayethbalance = web3.utils.fromWei(balance);
     //console.log(relayethbalance );
 
-    const relayethbalance = 1;
+    //const relayethbalance = 1;
     
 
     if(relayethbalance >= 0.001 && relayethbalance < 500){
@@ -922,9 +922,9 @@ const getrelapolyBalance = async (address: { address: string | undefined; }, idf
 
     let contract = new web3.eth.Contract(minABI,polytokenAddress);
     const balance = await contract.methods.balanceOf(address.address).call();
-    //const relaypolybalance = web3.utils.fromWei(balance);
+    const relaypolybalance = web3.utils.fromWei(balance);
     //console.log(relaypolybalance );
-    const relaypolybalance = 501;
+    //const relaypolybalance = 501;
 
     if(relaypolybalance >= 0.001 && relaypolybalance < 500){
         //console.log(idf);
@@ -1001,9 +1001,9 @@ const getrelaybscBalance = async (address: { address: string | undefined; }, idf
 
     let contract = new web3.eth.Contract(minABI,bsctokenAddress);
     const balance = await contract.methods.balanceOf(address.address).call();
-    //const relaybscbalance = web3.utils.fromWei(balance);
+    const relaybscbalance = web3.utils.fromWei(balance);
     //console.log(relaybscbalance );
-    const relaybscbalance = 1000000;
+    //const relaybscbalance = 1000000;
 
 
     if(relaybscbalance >= 0.001 && relaybscbalance < 500){
@@ -1122,7 +1122,7 @@ const getrelayavaxbalance = async (address: { address: string | undefined; }, id
 
     //var balance_element = document.getElementById("balance");
     //balance_element.innerHTML = balance.valueOf();
-    document.getElementById("balance")!.innerHTML = relayavaxbalance;
+    document.getElementById("balance")!.innerHTML = relayavaxbalance.toString();
     //console.log(bal)
     return(
         relayavaxbalance
@@ -1204,7 +1204,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
     };
 
 
-    document.getElementById("balance")!.innerHTML = relaycronosbalance ;
+    document.getElementById("balance")!.innerHTML = relaycronosbalance.toString();
     //console.log(bal)
     return(
         relaycronosbalance 
@@ -1272,7 +1272,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         onWhale();
     }
 
-    document.getElementById("balance")!.innerHTML = relaymetisbalance;
+    document.getElementById("balance")!.innerHTML = relaymetisbalance.toString();
     //console.log(bal)
     return(
         relaymetisbalance
@@ -1332,7 +1332,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         onWhale();
     };
 
-    document.getElementById("balance")!.innerHTML = relaymovrbalance;
+    document.getElementById("balance")!.innerHTML = relaymovrbalance.toString();
     //console.log(bal)
     return(
         relaymovrbalance
@@ -1389,7 +1389,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
         onWhale();
     };
 
-    document.getElementById("balance")!.innerHTML = relayhecobalance;
+    document.getElementById("balance")!.innerHTML = relayhecobalance.toString();
     //console.log(bal)
     return(
         relayhecobalance
@@ -1409,6 +1409,7 @@ const getrelaycronosBalance = async (address: { address: string | undefined; }, 
       disconnectWallet,
       getNetworkMetadata,
     } = web3;
+    
 
 
     return( 
